@@ -63,3 +63,54 @@ Optimized:   False  # O(n)
 =================================================
 
 """
+
+def has_duplicate_brute(nums):
+    """
+    Brute-force approach: Uses nested loops to check every possible pair for equality.
+    Time complexity: O(n^2)
+    Space complexity: O(1)
+    """
+
+    for i in range(len(nums)):
+       
+        for j in range(i + 1, len(nums)):
+            if nums[i] == nums[j]:
+                return True
+                
+    return False
+
+
+def has_duplicate_fast(nums):
+    """
+    Optimized approach: Uses a set to track numbers we have already seen.
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+  
+    seen = set()
+    
+    for num in nums:
+      
+        if num in seen:
+            return True
+        
+        seen.add(num)
+        
+    return False
+
+
+# Input Example 1
+nums1 = [1, 2, 3, 1]
+
+print("Output Example 1:")
+print(f"Brute Force: {has_duplicate_brute(nums1)}   # O(n^2)")
+print(f"Optimized:   {has_duplicate_fast(nums1)}   # O(n)")
+
+print("-" * 30)
+
+# Input Example 2
+nums2 = [1, 2, 3, 4]
+
+print("Output Example 2:")
+print(f"Brute Force: {has_duplicate_brute(nums2)}  # O(n^2)")
+print(f"Optimized:   {has_duplicate_fast(nums2)}  # O(n)")

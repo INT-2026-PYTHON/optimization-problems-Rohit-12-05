@@ -87,3 +87,60 @@ O(1) time, giving an overall O(n) algorithm.
 =================================================
 
 """
+
+def two_sum_brute(nums, target):
+    """
+    Brute-force approach: Uses nested loops to check every possible pair.
+    Time complexity: O(n^2)
+    Space complexity: O(1)
+    """
+    # Outer loop goes through every number
+    for i in range(len(nums)):
+        # Inner loop checks the remaining numbers after i
+        for j in range(i + 1, len(nums)):
+            # If they add up to the target, return their indices
+            if nums[i] + nums[j] == target:
+                return (i, j)
+
+
+def two_sum_fast(nums, target):
+    """
+    Optimized approach: Uses a dictionary to store values and their indices.
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    # Dictionary to keep track of the numbers we have seen: {number: index}
+    seen = {}
+    
+    # Loop through the list exactly once
+    for i in range(len(nums)):
+        current_num = nums[i]
+        complement = target - current_num
+        
+        # If the complement we need is already in our dictionary, we are done!
+        if complement in seen:
+            return (seen[complement], i)
+            
+        # Otherwise, add the current number and its index to the dictionary
+        seen[current_num] = i
+
+
+# --- Testing the Functions ---
+
+# Input Example 1
+nums1 = [2, 7, 11, 15]
+target1 = 9
+
+print("Output Example 1:")
+print(f"Brute Force: {two_sum_brute(nums1, target1)}   # O(n^2)")
+print(f"Optimized:   {two_sum_fast(nums1, target1)}   # O(n)")
+
+print("-" * 30)
+
+# Input Example 2
+nums2 = [3, 2, 4]
+target2 = 6
+
+print("Output Example 2:")
+print(f"Brute Force: {two_sum_brute(nums2, target2)}   # O(n^2)")
+print(f"Optimized:   {two_sum_fast(nums2, target2)}   # O(n)")

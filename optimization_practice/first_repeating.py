@@ -83,3 +83,58 @@ element, giving an overall O(n) algorithm.
 =================================================
 
 """
+
+def first_repeating_brute(nums):
+    """
+    Brute-force approach: Uses nested loops to check every pair.
+    Time complexity: O(n^2)
+    Space complexity: O(1)
+    """
+    earliest_second_index = float('inf')
+    result = -1
+    
+    for i in range(len(nums)):
+       
+        for j in range(i + 1, len(nums)):
+            if nums[i] == nums[j]:
+               
+                if j < earliest_second_index:
+                    earliest_second_index = j
+                    result = nums[j]
+                    
+    return result
+
+
+def first_repeating_fast(nums):
+    """
+    Optimized approach: Uses a set for instant memory lookups.
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    seen = set()
+    
+    for num in nums:
+        
+        if num in seen:
+            return num
+            
+        seen.add(num)
+        
+    return -1
+
+
+# Input Example 1
+nums1 = [10, 5, 3, 4, 3, 5, 6]
+
+print("Output Example 1:")
+print(f"Brute Force: {first_repeating_brute(nums1)}   # O(n^2)")
+print(f"Optimized:   {first_repeating_fast(nums1)}   # O(n)")
+
+print("-" * 30)
+
+# Input Example 2
+nums2 = [1, 2, 3, 4, 5]
+
+print("Output Example 2:")
+print(f"Brute Force: {first_repeating_brute(nums2)}  # O(n^2)")
+print(f"Optimized:   {first_repeating_fast(nums2)}  # O(n)")

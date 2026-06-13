@@ -91,3 +91,59 @@ the overall algorithm runs in O(n).
 =================================================
 
 """
+
+def count_pairs_brute(nums, target):
+    """
+    Brute-force approach: Uses nested loops to check every possible pair.
+    Time complexity: O(n^2)
+    Space complexity: O(1)
+    """
+    count = 0
+
+    for i in range(len(nums)):
+
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                count += 1
+    return count
+
+
+def count_pairs_fast(nums, target):
+    """
+    Optimized approach: Uses a frequency dictionary to track occurrences.
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    freq = {}
+    count = 0
+    
+    for x in nums:
+        complement = target - x
+        
+        if complement in freq:
+            count += freq[complement]
+       
+        freq[x] = freq.get(x, 0) + 1
+        
+    return count
+
+
+# --- Testing the Functions ---
+
+# Input Example 1
+nums1 = [1, 5, 7, -1, 5]
+target1 = 6
+
+print("Output Example 1:")
+print(f"Brute Force: {count_pairs_brute(nums1, target1)}   # O(n^2)")
+print(f"Optimized:   {count_pairs_fast(nums1, target1)}   # O(n)")
+
+print("-" * 30)
+
+# Input Example 2
+nums2 = [1, 1, 1, 1]
+target2 = 2
+
+print("Output Example 2:")
+print(f"Brute Force: {count_pairs_brute(nums2, target2)}   # O(n^2)")
+print(f"Optimized:   {count_pairs_fast(nums2, target2)}   # O(n)")

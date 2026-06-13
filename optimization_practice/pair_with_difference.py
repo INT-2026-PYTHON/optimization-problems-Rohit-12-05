@@ -79,3 +79,55 @@ overall O(n) algorithm.
 =================================================
 
 """
+
+def has_pair_brute(nums, k):
+    """
+    Brute-force approach: Uses nested loops to check every possible pair's absolute difference.
+    Time complexity: O(n^2)
+    Space complexity: O(1)
+    """
+
+    for i in range(len(nums)):
+        
+        for j in range(i + 1, len(nums)):
+            
+            if abs(nums[i] - nums[j]) == k:
+                return True
+                
+    return False
+
+
+def has_pair_fast(nums, k):
+    """
+    Optimized approach: Uses a set for instant lookups.
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    
+    num_set = set(nums)
+    
+    for x in nums:
+        
+        if (x + k) in num_set or (x - k) in num_set:
+            return True
+            
+    return False
+
+
+# Input Example 1
+nums1 = [1, 5, 3, 4, 2]
+k1 = 3
+
+print("Output Example 1:")
+print(f"Brute Force: {has_pair_brute(nums1, k1)}   # O(n^2)")
+print(f"Optimized:   {has_pair_fast(nums1, k1)}   # O(n)")
+
+print("-" * 30)
+
+# Input Example 2
+nums2 = [8, 12, 16, 4, 0, 20]
+k2 = 9
+
+print("Output Example 2:")
+print(f"Brute Force: {has_pair_brute(nums2, k2)}  # O(n^2)")
+print(f"Optimized:   {has_pair_fast(nums2, k2)}  # O(n)")
